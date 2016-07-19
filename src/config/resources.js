@@ -15,7 +15,7 @@ var resources = {
             'Use \'/track current\' to get your total amount worked so far today.',
     on_break: 'You\'re currently on break. Please end your break first.',
     no_break: 'You are currently not on a break. Please start a new break if needed.',
-    no_day: 'ou have not started to work yet. Please start a new day if needed.',
+    no_day: 'You have not started to work yet. Please start a new day if needed.',
     start_break_day_not_found: 'Are you trying to take a break before even starting to work? Please start a new day if needed.',
     unsupported_command: 'Unsupported command.',
     work_info_in_minutes: 'You have worked a total of %d %s so far today.',
