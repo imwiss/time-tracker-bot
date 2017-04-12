@@ -5,7 +5,7 @@ var resources = {
   end_break: 'Your break was %d minutes long, for a total of %d minutes of break so far today.',
   end_day: 'Great, you\'re done!',
   enjoy_break: 'Great. Enjoy your break!',
-  error_occured: 'An error occured.',
+  error_occured: 'Oups! An error occured.',
   good_day: 'Alright! Have a good day at work today.',
   help: 'Use \'/track help\' to see the available commands.',
   help_commands: 'Use \'/track start day\' to start a new work day and begin tracking your time.\r\n' +

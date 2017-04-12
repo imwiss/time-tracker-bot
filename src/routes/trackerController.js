@@ -27,7 +27,7 @@ function handleAction(req, res, next) {
     res.send(message)
   }).catch(function (error) {
     logger.error(error)
-    res.send('Oups! An error just occured.\r\n' + resources.help)
+    res.send(resources.error_occured + '\r\n' + resources.help)
   })
 }
 

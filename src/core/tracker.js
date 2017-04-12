@@ -243,8 +243,8 @@ function findUserByUserId (userId, teamId) {
   return User.findOne({ slack_user_id: userId, team_id: teamId })
 }
 
-exports.getWorkDayInformation = getWorkDayInformation
 exports.endBreak = endBreak
 exports.endDay = endDay
+exports.getWorkDayInformation = getWorkDayInformation
 exports.startBreak = startBreak
 exports.startDay = startDay
