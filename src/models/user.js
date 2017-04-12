@@ -1,7 +1,6 @@
-var jsonSelect = require('mongoose-json-select');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
-var CommonPlugin = require('./plugins/common');
+var CommonPlugin = require('./plugins/common')
 
 const Users = new mongoose.Schema({
   team_id: {
@@ -19,15 +18,15 @@ const Users = new mongoose.Schema({
     required: true,
     index: true,
     trim: true,
-    unique: true,
+    unique: true
   },
   user_name: {
     type: String,
     required: true,
     trim: true
   }
-});
+})
 
-Users.plugin(CommonPlugin('user'));
+Users.plugin(CommonPlugin('user'))
 
-module.exports = mongoose.model('User', Users);
+module.exports = mongoose.model('User', Users)

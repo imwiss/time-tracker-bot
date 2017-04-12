@@ -1,12 +1,11 @@
-var jsonSelect = require('mongoose-json-select');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
-var CommonPlugin = require('./plugins/common');
+var CommonPlugin = require('./plugins/common')
 
 const WorkDays = new mongoose.Schema({
   start_time: {
     type: Date,
-    required: true,
+    required: true
   },
   end_time: {
     type: Date
@@ -24,11 +23,11 @@ const WorkDays = new mongoose.Schema({
     required: true
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
-});
+})
 
-WorkDays.plugin(CommonPlugin('workDay'));
+WorkDays.plugin(CommonPlugin('workDay'))
 
-module.exports = mongoose.model('WorkDay', WorkDays);
+module.exports = mongoose.model('WorkDay', WorkDays)

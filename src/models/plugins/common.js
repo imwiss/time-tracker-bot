@@ -1,10 +1,8 @@
-var jsonSelect = require('mongoose-json-select');
-var beautifulValidation = require('mongoose-beautiful-unique-validation');
+var jsonSelect = require('mongoose-json-select')
+var beautifulValidation = require('mongoose-beautiful-unique-validation')
 
-module.exports = function CommonPlugin(object) {
-
-  return function Plugin(Schema) {
-
+module.exports = function CommonPlugin (object) {
+  return function Plugin (Schema) {
     Schema.add({
       id: {
         type: String,
@@ -26,21 +24,19 @@ module.exports = function CommonPlugin(object) {
         trim: true,
         lowercase: true
       }
-    });
+    })
 
     Schema.pre('validate', function (next) {
-      this.object = object;
-      this.created_at = this._id.getTimestamp();
-      this.updated_at = Date.now();
-      this.id = this._id.toString();
-      next();
-    });
+      this.object = object
+      this.created_at = this._id.getTimestamp()
+      this.updated_at = Date.now()
+      this.id = this._id.toString()
+      next()
+    })
 
-    Schema.plugin(jsonSelect, '-_id -__v');
-    Schema.plugin(beautifulValidation);
+    Schema.plugin(jsonSelect, '-_id -__v')
+    Schema.plugin(beautifulValidation)
 
-    return Schema;
-
-  };
-
+    return Schema
+  }
 }
