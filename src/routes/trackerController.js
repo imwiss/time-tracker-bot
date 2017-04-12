@@ -14,18 +14,8 @@ const END_BREAK_ACTION = 'end break'
 const CURRENT = 'current'
 const HELP = 'help'
 
-function handleAction (req, res, next) {
+function handleAction(req, res, next) {
   logger.info(JSON.stringify(req.body))
-  executeCorrespondingAction(req)
-    .then(function (message) {
-      res.send(message)
-    })
-    .catch(function (error) {
-      res.send(error + ' ' + resources.help)
-    })
-}
-
-function executeCorrespondingAction (req) {
   var currentUser = {
     slack_user_id: req.body.user_id,
     user_name: req.body.user_name,
@@ -33,27 +23,29 @@ function executeCorrespondingAction (req) {
     team_id: req.body.team_id,
     team_domain: req.body.team_domain
   }
+  Q.when(executeCorrespondingAction (currentUser), function (message) {
+    res.send(message)
+  }).catch(function (error) {
+    logger.error(error)
+    res.send('Oups! An error just occured.\r\n' + resources.help)
+  })
+}
 
-  if (currentUser.action.toLowerCase() === START_DAY_ACTION) {
-    return tracker.startDay(currentUser)
+function executeCorrespondingAction(currentUser) {
+  switch (currentUser.action.toLowerCase()) {
+    case START_DAY_ACTION:
+      return tracker.startDay(currentUser)
+    case END_DAY_ACTION:
+      return tracker.endDay(currentUser)
+    case START_BREAK_ACTION:
+      return tracker.startBreak(currentUser)
+    case END_BREAK_ACTION:
+      return tracker.endBreak(currentUser)
+    case CURRENT:
+      return tracker.getWorkDayInformation(currentUser)
+    default:
+      return Q(resources.help_commands)
   }
-  if (currentUser.action.toLowerCase() === END_DAY_ACTION) {
-    return tracker.endDay(currentUser)
-  }
-  if (currentUser.action.toLowerCase() === START_BREAK_ACTION) {
-    return tracker.startBreak(currentUser)
-  }
-  if (currentUser.action.toLowerCase() === END_BREAK_ACTION) {
-    return tracker.endBreak(currentUser)
-  }
-  if (currentUser.action.toLowerCase() === HELP) {
-    return Q(resources.help_commands)
-  }
-  if (currentUser.action.toLowerCase() === CURRENT) {
-    return tracker.getWorkDayInformation(currentUser)
-  }
-
-  throw resources.unsupported_command
 }
 
 exports.handleAction = handleAction
